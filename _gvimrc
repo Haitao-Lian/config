@@ -1,0 +1,30 @@
+" set background=dark
+set guioptions-=m
+set guioptions-=T
+set guioptions-=L
+" set guioptions-=r
+set guioptions-=l
+set guioptions-=b
+
+" colorscheme less
+" colorscheme paramount
+let my_dark_colorschemes = ['less', 'paramount', 'molokai', 'strange', 'ubaryd']
+execute 'colorscheme' my_dark_colorschemes[rand() % (len(my_dark_colorschemes) - 1 ) ]
+" set guifont=Consolas:h16:i,Cascadia\ Code:h16:i
+set guifont=Consolas:h16,Cascadia\ Code:h16
+" set guifont=BigBlue_TerminalPlus\ NF:h16
+" set guifont=Fixedsys:h26
+colorscheme slate
+
+" highlight Normal guifg=white guibg=black
+" if strftime("%H") < 17 && strftime("%H") > 6
+"     set background=light
+"     let my_light_colorschemes = ['paramount', 'laederon']
+"     execute 'colorscheme' my_light_colorschemes[rand() % (len(my_light_colorschemes) - 1 ) ]
+"     colorscheme paramount
+" else 
+"     set background=dark
+" endif
+" colorscheme gruvbox
+" let g:SnazzyTransparent = 1
+" hi Normal ctermfg=252 ctermbg=none

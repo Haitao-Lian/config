@@ -1,0 +1,391 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+  // Vim 配置
+  "scrolloff.scrolloff": 8,
+  "vim.easymotion": true, // 几个插件
+  // "vim.sneak": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.color": "rgba(72,209,204,1.000)",
+  "editor.lineNumbers": "on",
+  // "vim.insertModeKeyBindings": [
+  //   {
+  //   }
+  // ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["K"],
+      "after": ["5", "g", "k"]
+    },
+    {
+      "before": ["J"],
+      "after": ["5", "g", "j"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["H"],
+      "after": ["^"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<Enter>"],
+      "after": ["v", "a", "f"]
+    },
+    {
+      "before": ["<shift+tab>"],
+      "after": ["g", "T"]
+    },
+    {
+      "before": ["<tab>"],
+      "after": ["g", "t"]
+    },
+    {
+      "before": ["K"],
+      "after": ["5", "g", "k"]
+    },
+    {
+      "before": ["J"],
+      "after": ["5", "g", "j"]
+    },
+    {
+      "before": ["k"],
+      "after": ["g", "k"]
+    },
+    {
+      "before": ["j"],
+      "after": ["g", "j"]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": [":w"]
+    },
+    {
+      "before": ["<leader>", "q"],
+      "commands": [":q"]
+    },
+    {
+      "before": ["n"],
+      "after": ["z", "z", "n"]
+    },
+    {
+      "before": ["N"],
+      "after": ["z", "z", "N"]
+    },
+    {
+      "before": ["L"],
+      "after": ["$"]
+    },
+    {
+      "before": ["H"],
+      "after": ["^"]
+    },
+    {
+      "before": ["G"],
+      "after": ["G", "z", "z"]
+    },
+    {
+      "before": ["<leader>", "<Enter>"],
+      "commands": [":nohl"]
+    },
+    // {
+    //   "before": ["~"],
+    //   "after": ["`"]
+    // },
+    // {
+    //   "before": ["`"],
+    //   "after": ["~"]
+    // },
+
+    {
+      "before": ["<leader>", "v"],
+      "after": ["<C-v>"]
+    },
+
+    // split!
+    {
+      "before": ["z", "l"],
+      "commands": ["workbench.action.splitEditorRight"]
+    },
+    {
+      "before": ["z", "h"],
+      "commands": ["workbench.action.splitEditorLeft"]
+    },
+    {
+      "before": ["z", "j"],
+      "commands": ["workbench.action.splitEditorDown"]
+    },
+    {
+      "before": ["z", "k"],
+      "commands": ["workbench.action.splitEditorUp"]
+    },
+    // change screen
+    {
+      "before": ["t", "n"],
+      "commands": [":tabe"]
+    },
+    // jump windows
+    {
+      "before": ["<leader>", "l"],
+      "after": ["<C-w>", "l"]
+    },
+    {
+      "before": ["<leader>", "h"],
+      "after": ["<C-w>", "h"]
+    },
+    {
+      "before": ["<leader>", "k"],
+      "after": ["<C-w>", "k"]
+    },
+    {
+      "before": ["<leader>", "j"],
+      "after": ["<C-w>", "j"]
+    },
+    // {
+    // "before": ["K"],
+    // "commands": ["lineBreakInsert"],
+    // "silent": true
+    // },
+    // jump to terminal from editor
+    {
+      "before": ["<leader>", "t"],
+      "commands": ["workbench.action.terminal.focus"]
+    },
+    // close the workbench(Terminal, ControlPanel)
+    {
+      "before": ["<leader>", "c", "t"],
+      "commands": ["workbench.action.closePanel"]
+    },
+    // close the leftbench
+    {
+      "before": ["<leader>", "c", "h"],
+      "commands": ["workbench.action.closeSidebar"]
+    },
+    // run code
+    {
+      "before": ["<leader>", "r", "c"],
+      "commands": ["code-runner.run"]
+    },
+    // create a new file
+    {
+      "before": ["<leader>", "n", "f"],
+      "commands": ["explorer.newFile"]
+    },
+    // run code analysis
+    {
+      "before": ["<leader>", "c", "a"],
+      "commands": ["C_Cpp.RunCodeAnalysisOnOpenFiles"]
+    },
+    // easymotion
+    {
+      "before": ["s"],
+      "after": ["<leader>", "<leader>", "s"]
+    },
+    // formatting
+    {
+      "before": ["<leader>", "f", "m"],
+      "commands": ["editor.action.formatDocument"]
+    },
+    // Rename Symbol
+    {
+      "before": ["<leader>", "r", "n"],
+      "commands": ["editor.action.rename"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-n>": false
+  },
+  "files.autoSave": "onFocusChange",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.mouseWheelZoom": true,
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "explorer.confirmDelete": false,
+  "git.ignoreMissingGitWarning": true,
+  "editor.accessibilitySupport": "off",
+  "explorer.confirmDragAndDrop": false,
+  // "editor.tokenColorCustomizations": {
+  //   "keywords": "#A9AD7D",
+  //   "strings": "#D3D3D3",
+  //   "numbers": "#FF0000",
+  //   "variables": "#FFFFFF",
+  //   "functions": "#8CA3A3",
+
+  //   "textMateRules": [
+  //     {
+  //       "scope": [
+  //         "constant.other",
+  //         "string.other",
+  //         "keyword",
+  //         "constant",
+  //         "meta.function",
+  //         "storage"
+  //       ],
+  //       "settings": {
+  //         // "foreground": "#008080",
+  //         "fontStyle": "italic"
+  //       }
+  //     }
+  //   ]
+  // },
+  "workbench.colorCustomizations": {
+    "editor.findMatchBackground": "#0000FF",
+    "editor.findMatchHighlightBackground": "#0000FF",
+    // "editor.foreground": "#FFFFFF",
+    "[Darc City]": {
+      "editor.background": "#000000",
+      "editor.foreground": "#FFFFFF",
+      "editor.findMatchBackground": "#0000FF",
+      "editor.findMatchHighlightBackground": "#0000FF",
+      "activityBar.background": "#000000",
+      "sideBar.background": "#000000",
+      "sideBarSectionHeader.background": "#000000",
+      "sideBarSectionHeader.border": "#000000",
+      "statusBar.background": "#000000",
+      "statusBar.border": "#000000",
+      "titleBar.activeBackground": "#000000",
+      "menu.selectionBackground": "#000000",
+      "banner.background": "#000000",
+      "actionBar.toggledBackground": "#000000",
+      "tab.activeBackground": "#000000",
+      "tab.activeBorder": "#000000"
+    },
+    "[Material Theme High Contrast]": {
+      "activityBarBadge.background": "#FF4081",
+      "activityBar.activeBorder": "#FF4081",
+      "list.activeSelectionForeground": "#FF4081",
+      "list.inactiveSelectionForeground": "#FF4081",
+      "list.highlightForeground": "#FF4081",
+      "scrollbarSlider.activeBackground": "#FF408150",
+      "editorSuggestWidget.highlightForeground": "#FF4081",
+      "textLink.foreground": "#FF4081",
+      "progressBar.background": "#FF4081",
+      "pickerGroup.foreground": "#FF4081",
+      "tab.activeBorder": "#FF4081",
+      "notificationLink.foreground": "#FF4081",
+      "editorWidget.resizeBorder": "#FF4081",
+      "editorWidget.border": "#FF4081",
+      "settings.modifiedItemIndicator": "#FF4081",
+      "settings.headerForeground": "#FF4081",
+      "panelTitle.activeBorder": "#FF4081",
+      "breadcrumb.activeSelectionForeground": "#FF4081",
+      "menu.selectionForeground": "#FF4081",
+      "menubar.selectionForeground": "#FF4081",
+      "editor.findMatchBorder": "#FF4081",
+      "selection.background": "#FF408140",
+      "statusBarItem.remoteBackground": "#FF4081"
+    },
+    "[Material Theme Lighter High Contrast]": {
+      "activityBarBadge.background": "#E57373",
+      "activityBar.activeBorder": "#E57373",
+      "list.activeSelectionForeground": "#E57373",
+      "list.inactiveSelectionForeground": "#E57373",
+      "list.highlightForeground": "#E57373",
+      "scrollbarSlider.activeBackground": "#E5737350",
+      "editorSuggestWidget.highlightForeground": "#E57373",
+      "textLink.foreground": "#E57373",
+      "progressBar.background": "#E57373",
+      "pickerGroup.foreground": "#E57373",
+      "tab.activeBorder": "#E57373",
+      "notificationLink.foreground": "#E57373",
+      "editorWidget.resizeBorder": "#E57373",
+      "editorWidget.border": "#E57373",
+      "settings.modifiedItemIndicator": "#E57373",
+      "settings.headerForeground": "#E57373",
+      "panelTitle.activeBorder": "#E57373",
+      "breadcrumb.activeSelectionForeground": "#E57373",
+      "menu.selectionForeground": "#E57373",
+      "menubar.selectionForeground": "#E57373",
+      "editor.findMatchBorder": "#E57373",
+      "selection.background": "#E5737340",
+      "statusBarItem.remoteBackground": "#E57373"
+    },
+    "editor.lineHighlightBackground": "#1073cf2d",
+    "editor.lineHighlightBorder": "#9fced11f"
+  },
+  "materialTheme.accent": "Red",
+  "markdown-preview-enhanced.previewTheme": "one-dark.css",
+  "editor.fontLigatures": false,
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "overrideName": true,
+      "args": ["-NoExit", "/c", "chcp 65001"],
+      "icon": "terminal-powershell",
+      "env": {
+        "TEST_VAR": "value"
+      }
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "editor.unicodeHighlight.allowedLocales": {
+    "zh-hant": true
+  },
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "update.mode": "none",
+  // "editor.fontFamily": "Hasklug Nerd Font Mono, 'monospace', monospace",
+  // "editor.fontFamily": "BPmono, 'monospace', monospace",
+  // "editor.fontFamily": "JetBrainsMono Nerd Font Mono, 'monospace', monospace",
+  "editor.fontFamily": "Microsoft YaHei Mono, 'monospace', monospace",
+  // "editor.fontFamily": "Cascadia Code, 'monospace', monospace",
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.fontWeight": "450",
+  "editor.fontSize": 16,
+  "terminal.integrated.fontWeight": "normal",
+  "editor.inlayHints.enabled": "off",
+  "editor.wordWrap": "on",
+  "diffEditor.wordWrap": "off",
+  "workbench.layoutControl.enabled": false,
+  "workbench.activityBar.location": "top",
+  "editor.minimap.enabled": false,
+  "window.restoreWindows": "none",
+  "editor.renderLineHighlight": "none",
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth",
+  "terminal.integrated.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.bracketPairColorization.enabled": false,
+  // -------------------NERD Tree-----------------------//
+  /*
+  press 'm' and press single char:
+  a: create a new file
+  f: create a new folder
+  d: delete a file(move to trash)
+  c: copt a file
+  v: paste a file
+  r: rename a file
+  */
+  "nerdtree.hideSidebarWhenOpenFile": false,
+  // -------------------NERD Tree-----------------------//
+  "editor.occurrencesHighlight": "off",
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\Software\\im-select-1.0.1\\im-select-win\\out\\x64\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "D:\\Software\\im-select-1.0.1\\im-select-win\\out\\x64\\im-select.exe {im}",
+  "terminal.integrated.enablePersistentSessions": false,
+  "editor.formatOnSave": true,
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.intelliSenseUpdateDelay": 500,
+  "window.zoomLevel": 1,
+  "evenBetterToml.formatter.columnWidth": 2,
+  "evenBetterToml.formatter.indentTables": false,
+  "evenBetterToml.formatter.alignEntries": true,
+  "evenBetterToml.formatter.allowedBlankLines": 2,
+  "window.titleBarStyle": "custom"
+}
