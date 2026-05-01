@@ -1,0 +1,320 @@
+" ============================================================
+" Clean Vim configuration
+" Maintained as a portable vimrc for Linux / WSL / Fedora / Ubuntu
+" ============================================================
+
+set nocompatible
+scriptencoding utf-8
+
+" ------------------------------------------------------------
+" Leader keys
+" ------------------------------------------------------------
+let mapleader = " "
+let maplocalleader = ","
+
+" ------------------------------------------------------------
+" Environment detection
+" ------------------------------------------------------------
+let s:is_windows = has('win32') || has('win64')
+let s:is_linux = has('unix') && !has('macunix')
+let s:is_gui = has('gui_running')
+
+" ------------------------------------------------------------
+" Encoding
+" ------------------------------------------------------------
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+
+" ------------------------------------------------------------
+" Basic options
+" ------------------------------------------------------------
+syntax enable
+filetype plugin indent on
+
+set number
+set wrap
+set showcmd
+set wildmenu
+set ruler
+set laststatus=2
+
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+set scrolloff=8
+set mouse=
+set path+=**
+set backspace=indent,eol,start
+set smartindent
+set hidden
+set belloff=all
+set t_Co=256
+
+if exists('+termguicolors')
+  set termguicolors
+endif
+
+if exists('+signcolumn')
+  set signcolumn=yes
+endif
+
+" Avoid background color erase issues in some terminals.
+let &t_ut = ''
+
+" autochdir is convenient, but it can confuse project search / build commands.
+" Enable it in ~/.vimrc.local only if you really need it.
+" set autochdir
+
+" ------------------------------------------------------------
+" GUI-only options
+" ------------------------------------------------------------
+if s:is_gui
+  set lines=45
+  set columns=80
+endif
+
+" ------------------------------------------------------------
+" Indentation
+" ------------------------------------------------------------
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" ------------------------------------------------------------
+" Colorscheme
+" ------------------------------------------------------------
+set background=dark
+
+function! s:TryColorscheme(name) abort
+  try
+    execute 'colorscheme ' . a:name
+  catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme default
+  endtry
+endfunction
+
+call s:TryColorscheme('256_noir')
+
+" Keep your original split highlight. If it looks odd in some terminal,
+" move this line to ~/.vimrc.local.
+highlight VertSplit ctermbg=black ctermfg=Red guibg=#000000 guifg=#FF00FF
+
+" ------------------------------------------------------------
+" vim-plug
+" ------------------------------------------------------------
+let s:plug_file = expand('~/.vim/autoload/plug.vim')
+
+if filereadable(s:plug_file)
+  call plug#begin(expand('~/.vim/plugged'))
+
+  " Completion / LSP
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Motion
+  Plug 'easymotion/vim-easymotion'
+
+  " Text objects / selection / visual helpers
+  Plug 'gcmt/wildfire.vim'
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'junegunn/vim-peekaboo'
+  Plug 'tpope/vim-surround'
+
+  " Marks / bookmarks
+  Plug 'kshenoy/vim-signature'
+
+  call plug#end()
+else
+  echohl WarningMsg
+  echom 'vim-plug not found. Install it first, then run :PlugInstall.'
+  echohl None
+endif
+
+function! s:PlugInstalled(name) abort
+  return exists('g:plugs')
+        \ && has_key(g:plugs, a:name)
+        \ && isdirectory(g:plugs[a:name].dir)
+endfunction
+
+" ------------------------------------------------------------
+" netrw file tree
+" ------------------------------------------------------------
+let g:netrw_banner = 0
+let g:netrw_winsize = 20
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+let g:netrw_browse_split = 4
+
+nnoremap <silent> tt :Vexplore<CR>
+
+" ------------------------------------------------------------
+" CoC.nvim
+" ------------------------------------------------------------
+let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-vimlsp',
+      \ 'coc-python',
+      \ 'coc-marketplace',
+      \ 'coc-tsserver',
+      \ 'coc-snippets',
+      \ 'coc-java',
+      \ 'coc-clangd',
+      \ 'coc-go'
+      \ ]
+
+set updatetime=100
+set completeopt=menu,menuone,noselect
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1] =~# '\s'
+endfunction
+
+function! ShowDocumentation() abort
+  if exists('*CocAction') && CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+if s:PlugInstalled('coc.nvim')
+  inoremap <silent><expr> <TAB>
+        \ coc#pum#visible() ? coc#pum#next(1) :
+        \ CheckBackspace() ? "\<Tab>" :
+        \ coc#refresh()
+
+  inoremap <expr><S-TAB>
+        \ coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+  inoremap <silent><expr> <CR>
+        \ coc#pum#visible() ? coc#pum#confirm() :
+        \ "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  inoremap <silent><expr> <C-E> coc#refresh()
+
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+
+  nnoremap <silent> gh :call ShowDocumentation()<CR>
+  nmap <leader>rn <Plug>(coc-rename)
+  nnoremap <leader>fm :call CocActionAsync('format')<CR>
+  nnoremap <leader>ol :CocList outline<CR>
+
+  let g:coc_snippet_next = '<tab>'
+endif
+
+" ------------------------------------------------------------
+" EasyMotion
+" ------------------------------------------------------------
+let g:EasyMotion_smartcase = 1
+
+if s:PlugInstalled('vim-easymotion')
+  nmap <leader>s <Plug>(easymotion-prefix)
+  nmap s <leader>ss
+endif
+
+" ------------------------------------------------------------
+" Helper functions
+" ------------------------------------------------------------
+function! ClosePair(char) abort
+  if getline('.')[col('.') - 1] ==# a:char
+    return "\<Right>"
+  endif
+  return a:char
+endfunction
+
+" ------------------------------------------------------------
+" Autocmd
+" ------------------------------------------------------------
+augroup my_vimrc
+  autocmd!
+
+  " Restore cursor position when reopening files.
+  autocmd BufReadPost *
+        \ if line("'\"") > 1 && line("'\"") <= line('$') |
+        \   execute "normal! g'\"" |
+        \ endif
+
+  " C / C++ use 8-width indentation in your original config.
+  autocmd FileType c,cpp setlocal tabstop=8 shiftwidth=8 softtabstop=8
+
+  " Optional C++ colorscheme. Safe even when the colorscheme is missing.
+  autocmd FileType cpp call <SID>TryColorscheme('distill')
+
+  " Easy comment in visual mode for C / Java.
+  autocmd FileType c,java vnoremap <buffer> C :normal! I// <CR>
+
+  " Run current file. These mappings are buffer-local.
+  autocmd FileType java nnoremap <buffer> <leader>rc :write<CR>:!java %<CR>
+  autocmd FileType python nnoremap <buffer> <leader>rc :write<CR>:!python3 %<CR>
+  autocmd FileType c nnoremap <buffer> <leader>rc :write<CR>:!gcc % -o %< && ./%<<CR>
+  autocmd FileType cpp nnoremap <buffer> <leader>rc :write<CR>:!g++ % -o %< && ./%<<CR>
+  autocmd FileType go nnoremap <buffer> <leader>rc :write<CR>:!go run %<CR>
+augroup END
+
+" ------------------------------------------------------------
+" Key mappings
+" ------------------------------------------------------------
+nnoremap <leader>w :write<CR>
+nnoremap <leader>q :quit<CR>
+nnoremap <leader><CR> :nohlsearch<CR>
+nnoremap <leader>v <C-v>
+
+nnoremap n nzz
+nnoremap N Nzz
+
+nnoremap zl :set splitright<CR>:vsplit<CR>
+nnoremap zh :set nosplitright<CR>:vsplit<CR>
+nnoremap zk :set nosplitbelow<CR>:split<CR>
+nnoremap zj :set splitbelow<CR>:split<CR>
+
+nnoremap <leader>l <C-W>l
+nnoremap <leader>k <C-W>k
+nnoremap <leader>h <C-W>h
+nnoremap <leader>j <C-W>j
+
+nnoremap <Up> :resize +5<CR>
+nnoremap <Down> :resize -5<CR>
+nnoremap <Left> :vertical resize -5<CR>
+nnoremap <Right> :vertical resize +5<CR>
+
+nnoremap tn :tabnew<CR>
+nnoremap <Tab> gt
+nnoremap <S-Tab> gT
+
+nnoremap to :oldfiles<CR>
+
+nnoremap L $
+nnoremap H ^
+nnoremap j gj
+nnoremap k gk
+nnoremap K 5gk
+nnoremap J 5gj
+
+vnoremap D :m '>+1<CR>gv=gv
+vnoremap U :m '<-2<CR>gv=gv
+
+" Pair completion.
+inoremap ( ()<Esc>i
+inoremap ) <C-r>=ClosePair(')')<CR>
+inoremap { {}<Esc>i
+inoremap } <C-r>=ClosePair('}')<CR>
+inoremap [ []<Esc>i
+inoremap ] <C-r>=ClosePair(']')<CR>
+
+" ------------------------------------------------------------
+" Local private config
+" Put machine-specific settings here, such as font, shell, local paths,
+" GUI size, clipboard policy, or temporary experiments.
+" ------------------------------------------------------------
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
